@@ -98,16 +98,15 @@ jobs:
           
           echo "Firmware file copied to ${TARGET_DIR}"
           
-          # Get partition offsets
-          BOOTLOADER_OFFSET="0x0"
+          # Get partition offsets from previous step
           PARTITIONS_OFFSET="${{ steps.offsets.outputs.partitions_offset }}"
           APP0_OFFSET_HEX="${{ steps.offsets.outputs.app0_offset }}"
+
+          # Make sure they are correct
+          PARTITIONS_OFFSET_DEC=$(printf "%d" "$PARTITIONS_OFFSET")
+          APP0_OFFSET_DEC=$(printf "%d" "$APP0_OFFSET_HEX")
           
-          # Convert hex offsets to decimal for JSON
-          PARTITIONS_OFFSET_DEC=$((16#${PARTITIONS_OFFSET#0x}))
-          APP0_OFFSET_DEC=$((16#${APP0_OFFSET_HEX#0x}))
-          
-          echo "Offsets: Bootloader=${BOOTLOADER_OFFSET}, Partitions=${PARTITIONS_OFFSET} (${PARTITIONS_OFFSET_DEC}), App=${APP0_OFFSET_HEX} (${APP0_OFFSET_DEC})"
+          echo "Offsets: Partitions=${PARTITIONS_OFFSET} (${PARTITIONS_OFFSET_DEC}), App=${APP0_OFFSET_HEX} (${APP0_OFFSET_DEC})"
 
           # Full installation manifest (flashes bootloader, partition table, and app)
           # This will erase the entire device.
