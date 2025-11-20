@@ -1,4 +1,4 @@
-name: Conjure & Publish the Web Flasher Grimoire
+name: Creare et Publicare Web Flasher
 
 on:
   push:
@@ -13,7 +13,7 @@ permissions:
   id-token: write
 
 jobs:
-  weave_and_deploy:
+  creare_et_publicare:
     runs-on: ubuntu-latest
     defaults:
       run:
