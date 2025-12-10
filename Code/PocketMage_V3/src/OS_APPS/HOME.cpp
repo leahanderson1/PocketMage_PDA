@@ -99,7 +99,8 @@ void commandSelect(String command) {
   } 
   /////////////////////////////
   else if (command == "sleep") {
-    pocketmage::power::deepSleep();
+    PWR_BTN_event = true;
+    //pocketmage::power::deepSleep();
   }
   /////////////////////////////
   else if (command == "home") {
